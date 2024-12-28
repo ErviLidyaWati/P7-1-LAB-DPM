@@ -33,6 +33,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Username"
+                    placeholderTextColor="#A37A93"
                     value={username}
                     onChangeText={setUsername}
                     autoCapitalize="none"
@@ -40,6 +41,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Email"
+                    placeholderTextColor="#A37A93"
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
@@ -48,6 +50,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
+                    placeholderTextColor="#A37A93"
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
@@ -80,40 +83,40 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 16,
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#F8E4EE",
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: "bold",
         marginBottom: 24,
-        color: "#333",
+        color: "#5D3A58",
     },
     subtitle: {
         fontSize: 16,
-        color: "#666",
+        color: "#7A506F",
         marginBottom: 24,
     },
     input: {
         width: "100%",
         height: 48,
-        borderColor: "#ccc",
+        borderColor: "#E0AFC8",
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 12,
         paddingHorizontal: 12,
         marginBottom: 16,
-        backgroundColor: "#fff",
+        backgroundColor: "#FFFFFF",
     },
     registerButton: {
         width: "100%",
         height: 48,
-        backgroundColor: "#007BFF",
-        borderRadius: 8,
+        backgroundColor: "#E09ABC",
+        borderRadius: 12,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 16,
     },
     registerButtonText: {
-        color: "#fff",
+        color: "#FFFFFF",
         fontSize: 16,
         fontWeight: "600",
     },
@@ -121,13 +124,13 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 48,
         borderWidth: 1,
-        borderColor: "#007BFF",
-        borderRadius: 8,
+        borderColor: "#E09ABC",
+        borderRadius: 12,
         justifyContent: "center",
         alignItems: "center",
     },
     loginButtonText: {
-        color: "#007BFF",
+        color: "#E09ABC",
         fontSize: 16,
         fontWeight: "600",
     },

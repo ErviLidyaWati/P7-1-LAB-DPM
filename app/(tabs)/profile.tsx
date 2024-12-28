@@ -50,7 +50,7 @@ const ProfileScreen = () => {
         return (
             <PaperProvider>
                 <ThemedView style={styles.container}>
-                    <ActivityIndicator animating={true}/>
+                    <ActivityIndicator animating={true} color="#A2D2FF"/>
                 </ThemedView>
             </PaperProvider>
         );
@@ -61,7 +61,7 @@ const ProfileScreen = () => {
             <ThemedView style={styles.container}>
                 {profile ? (
                     <ThemedView>
-                        <ThemedText style={styles.title}>Profile</ThemedText>
+                        <ThemedText style={styles.title}>Welcome, {profile.username}!</ThemedText>
                         <ThemedText style={styles.label}>Username:</ThemedText>
                         <ThemedText style={styles.value}>{profile.username}</ThemedText>
                         <ThemedText style={styles.label}>Email:</ThemedText>
@@ -96,25 +96,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
+        backgroundColor: '#FFFAF0', // Pastel cream background
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 24,
-        color: '#333',
+        color: '#4B6587', // Soft slate blue
     },
     label: {
         fontSize: 18,
         fontWeight: 'bold',
         marginTop: 16,
-        color: '#333',
+        color: '#4B6587', // Soft slate blue
     },
     value: {
         fontSize: 18,
-        color: '#666',
+        color: '#778CA3', // Light blue-grey
     },
     logoutButton: {
         marginTop: 24,
+        backgroundColor: '#A2D2FF', // Pastel blue
     },
 });
 

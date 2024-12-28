@@ -7,19 +7,20 @@ import {ThemedView} from "@/components/ThemedView";
 import {Button, Dialog, PaperProvider, Portal} from "react-native-paper";
 import API_URL from "../../config/config";
 
-export default function RegisterScreen() {
+export default function LoginScreen() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
     const [dialogVisible, setDialogVisible] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
     const [isSuccess, setIsSuccess] = useState(false);
     const router = useRouter();
 
-    const handleRegister = async () => {
+    const handleLogin = async () => {
         try {
-            await axios.post(`${API_URL}/api/auth/register`, { username, password, email });
-            setDialogMessage("Registration successful!");
+            const response = await axios.post(`${API_URL}/api/auth/login`, { username, password });
+            const { token } = response.data.data;
+            await AsyncStorage.setItem("token", token);
+            setDialogMessage("Login successful!");
             setIsSuccess(true);
             setDialogVisible(true);
         } catch (error) {
@@ -33,46 +34,41 @@ export default function RegisterScreen() {
     const handleDialogDismiss = () => {
         setDialogVisible(false);
         if (isSuccess) {
-            router.replace("/auth/LoginScreen");
+            router.replace("/(tabs)");
         }
     };
 
     return (
         <PaperProvider>
             <ThemedView style={styles.container}>
-                <Text style={styles.title}>Create an Account</Text>
-                <Text style={styles.subtitle}>Join us and get started</Text>
+                <Image source={require("../../assets/images/icon.png")} style={styles.logo} />
+                <Text style={styles.title}>Welcome Back!</Text>
+                <Text style={styles.subtitle}>Log in to continue</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="Username"
+                    placeholderTextColor="#C39EA0"
                     value={username}
                     onChangeText={setUsername}
                     autoCapitalize="none"
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={setEmail}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
                     placeholder="Password"
+                    placeholderTextColor="#C39EA0"
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
                 />
-                <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
-                    <Text style={styles.registerButtonText}>Register</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.loginButton} onPress={() => router.push("/auth/LoginScreen")}>
+                <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                     <Text style={styles.loginButtonText}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.registerButton} onPress={() => router.push("/auth/RegisterScreen")}>
+                    <Text style={styles.registerButtonText}>Register</Text>
                 </TouchableOpacity>
                 <Portal>
                     <Dialog visible={dialogVisible} onDismiss={handleDialogDismiss}>
-                        <Dialog.Title>{isSuccess ? "Success" : "Registration Failed"}</Dialog.Title>
+                        <Dialog.Title>{isSuccess ? "Success" : "Login Failed"}</Dialog.Title>
                         <Dialog.Content>
                             <Text>{dialogMessage}</Text>
                         </Dialog.Content>
@@ -92,7 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 16,
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#FFD9E8", // Soft pink pastel
     },
     logo: {
         width: 150,
@@ -101,52 +97,59 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: "bold",
         marginBottom: 8,
-        color: "#333",
+        color: "#721121", // Dark maroon for contrast
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: 18,
         marginBottom: 24,
-        color: "#666",
+        color: "#C3073F", // Bright pink for visibility
     },
     input: {
         width: "100%",
         height: 48,
-        borderColor: "#ccc",
+        borderColor: "#F8BBD0", // Light pink pastel
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 12,
         paddingHorizontal: 12,
         marginBottom: 16,
-        backgroundColor: "#fff",
+        backgroundColor: "#FFFFFF", // White input background
+        color: "#4A4A4A", // Dark gray text
     },
     loginButton: {
         width: "100%",
         height: 48,
-        backgroundColor: "#007BFF",
-        borderRadius: 8,
+        backgroundColor: "#C3073F", // Bright pink button
+        borderRadius: 12,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 16,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
     },
     loginButtonText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "600",
+        color: "#FFFFFF", // White text
+        fontSize: 18,
+        fontWeight: "bold",
     },
     registerButton: {
         width: "100%",
         height: 48,
-        borderWidth: 1,
-        borderColor: "#007BFF",
-        borderRadius: 8,
+        borderWidth: 2,
+        borderColor: "#C3073F", // Bright pink border
+        borderRadius: 12,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#FFE4EB", // Light pastel pink background
     },
     registerButtonText: {
-        color: "#007BFF",
+        color: "#C3073F", // Bright pink text
         fontSize: 16,
-        fontWeight: "600",
+        fontWeight: "bold",
     },
 });

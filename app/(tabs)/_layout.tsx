@@ -30,14 +30,14 @@ export default function TabLayout() {
                 name="index"
                 options={{
                     title: 'Todos',
-                    tabBarIcon: ({color}) => <IconSymbol size={28} name="list.fill" color={color}/>,
+                    tabBarIcon: ({color}) => <IconSymbol size={28} name="list.fill" color={color}/>, // Ganti dengan simbol yang valid jika perlu
                 }}
             />
             <Tabs.Screen
                 name="profile"
                 options={{
                     title: 'Profile',
-                    tabBarIcon: ({color}) => <IconSymbol size={28} name="person.fill" color={color}/>,
+                    tabBarIcon: ({color}) => <IconSymbol size={28} name="person.fill" color={color}/>, // Ganti dengan simbol yang valid jika perlu
                 }}
             />
         </Tabs>
